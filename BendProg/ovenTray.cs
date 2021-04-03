@@ -33,7 +33,10 @@ namespace BendProg
             _s = s;
             _angle = angle;
         }
-        
+
+        public ovenTray()
+        {
+        }
 
         public double K_factorCalculation()
         {
@@ -54,7 +57,7 @@ namespace BendProg
             return BAaft90;
         }
 
-        public double reamerA_Calculation(double kfactor)
+        public virtual double reamerA_Calculation(double kfactor)
         {
             if (_angle <= 90)
             {
@@ -68,7 +71,7 @@ namespace BendProg
             _reamerA = _sideA - (2 * _s) + (2 * _board) + (2 * _kink) + (2 * _BA);
             return _reamerA;
         }
-        public double reamerB_Calculation(double kfactor)
+        public virtual double reamerB_Calculation(double kfactor)
         {
             if (_angle <= 90)
             {
