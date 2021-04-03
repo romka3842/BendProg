@@ -33,30 +33,43 @@ namespace BendProg
             _s = s;
             _angle = angle;
         }
-
-        public ovenTray()
-        {
-        }
-
+        /// <summary>
+        /// Метод рассчёта К-фактора
+        /// </summary>
+        /// <returns></returns>
         public double K_factorCalculation()
         {
             double kfactor;
             kfactor = (Math.Log10(_rad / _s) * 0.5) + 0.65;
             return kfactor;
         }
+        /// <summary>
+        /// Метод рассчёта поправки на гибку при угле гиба < 90 градусов
+        /// </summary>
+        /// <param name="kfactor"></param>
+        /// <returns></returns>
         public double BA_calculation_before90(double kfactor)
         {
             double BA90;
             BA90 = (Math.PI * ((180 - _angle) / 180) * (_rad + ((_s * kfactor) / 2))) - (2 * (_rad + _s));
             return BA90;
         }
+        /// <summary>
+        /// Метод рассчёта поправки на гибку при угле гиба > 90 градусов
+        /// </summary>
+        /// <param name="kfactor"></param>
+        /// <returns></returns>
         public double BA_calculation_after90(double kfactor)
         {
             double BAaft90;
             BAaft90 = (Math.PI * ((180 - _angle) / 180) * (_rad + ((_s * kfactor) / 2))) - ((2 * (_rad + _s)) * Math.Tan(((180 - _angle) / 2) * Math.PI / 180));
             return BAaft90;
         }
-
+        /// <summary>
+        /// Рассчёт развертки по габариту А
+        /// </summary>
+        /// <param name="kfactor"></param>
+        /// <returns></returns>
         public virtual double reamerA_Calculation(double kfactor)
         {
             if (_angle <= 90)
@@ -71,6 +84,11 @@ namespace BendProg
             _reamerA = _sideA - (2 * _s) + (2 * _board) + (2 * _kink) + (2 * _BA);
             return _reamerA;
         }
+        /// <summary>
+        /// Рассчёт развертки по габариту B
+        /// </summary>
+        /// <param name="kfactor"></param>
+        /// <returns></returns>
         public virtual double reamerB_Calculation(double kfactor)
         {
             if (_angle <= 90)
@@ -85,6 +103,10 @@ namespace BendProg
             _reamerB = _sideB - (2 * _s) + (2 * _board) + (2 * _kink) + (2 * _BA);
             return _reamerB;
         }
+        /// <summary>
+        /// Рассчёт размеров вырубки угла
+        /// </summary>
+        /// <returns></returns>
         public double cutout_Calculation()
         {
             _cutout = _kink + _board - _s;

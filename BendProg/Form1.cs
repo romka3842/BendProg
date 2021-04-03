@@ -31,52 +31,153 @@ namespace BendProg
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ovenTray side4_tray = new ovenTray(4, SizeA, SizeB, bort, zak, _rad, _s, _angle);
-            double reamerA, reamerB;
-            label5.Text = null;
-            label4.Text = null;
-            label5.Text = "Результат: ";
-
-            if (radioButton1.Checked == true)
+            if (board4Tray.Checked == true)
             {
+                ovenTray side4_tray = new ovenTray(4, SizeA, SizeB, bort, zak, _rad, _s, _angle);
+                double reamerA, reamerB;
+                label5.Text = null;
+                label4.Text = null;
+                label5.Text = "Результат: ";
 
-                if (zak <= bort)
+                if (radioButton1.Checked == true)
                 {
-                    if (zak < 7 && zak > 0)
+
+                    if (zak <= bort)
                     {
-                        MessageBox.Show("Заковка меньше 7 мм! Проверьте минимальный отгиб на используемой матрице!", "Внимание!");
-                        radioButton2.Checked = false;
-                        double kfactor = side4_tray.K_factorCalculation();
+                        if (zak < 7 && zak > 0)
+                        {
+                            MessageBox.Show("Заковка меньше 7 мм! Проверьте минимальный отгиб на используемой матрице!", "Внимание!");
+                            radioButton2.Checked = false;
+                            double kfactor = side4_tray.K_factorCalculation();
 
-                        reamerA = side4_tray.reamerA_Calculation(kfactor);
-                        reamerB = side4_tray.reamerB_Calculation(kfactor);
+                            reamerA = side4_tray.reamerA_Calculation(kfactor);
+                            reamerB = side4_tray.reamerB_Calculation(kfactor);
 
-                        label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side4_tray._BA, kfactor);
-                        label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}", reamerA, reamerB);
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side4_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}. Размер вырубки углов {2:f1}x{2:f1}", reamerA, reamerB, side4_tray.cutout_Calculation());
+                        }
+                        else
+                        {
+                            radioButton2.Checked = false;
+                            double kfactor = side4_tray.K_factorCalculation();
+
+                            reamerA = side4_tray.reamerA_Calculation(kfactor);
+                            reamerB = side4_tray.reamerB_Calculation(kfactor);                           
+
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side4_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}. Размер вырубки углов {2:f1}x{2:f1}", reamerA, reamerB, side4_tray.cutout_Calculation());
+                        }
                     }
+
                     else
                     {
-                        radioButton2.Checked = false;
-                        double kfactor = side4_tray.K_factorCalculation();
-
-                        reamerA = side4_tray.reamerA_Calculation(kfactor);
-                        reamerB = side4_tray.reamerB_Calculation(kfactor);
-
-                        label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side4_tray._BA, kfactor);
-                        label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}. Размер вырубки углов {2:f1}x{2:f1}", reamerA, reamerB, side4_tray.cutout_Calculation());
+                        MessageBox.Show("Заковка больше, чем борт!");
                     }
                 }
-
-                else
+                if (radioButton2.Checked == true)
                 {
-                    MessageBox.Show("Заковка больше, чем борт!");
+                    radioButton1.Checked = false;
+                    MessageBox.Show("В разработке!", "В разработке!");
                 }
             }
-            if (radioButton2.Checked == true)
+            if (board3Tray.Checked == true)
             {
-                radioButton1.Checked = false;
-                MessageBox.Show("В разработке!", "В разработке!");
-            }            
+                ovenTray3 side3_tray = new ovenTray3(3, SizeA, SizeB, bort, zak, _rad, _s, _angle);
+                double reamerA, reamerB;
+                label5.Text = null;
+                label4.Text = null;
+                label5.Text = "Результат: ";
+
+                if (radioButton1.Checked == true)
+                {
+
+                    if (zak <= bort)
+                    {
+                        if (zak < 7 && zak > 0)
+                        {
+                            MessageBox.Show("Заковка меньше 7 мм! Проверьте минимальный отгиб на используемой матрице!", "Внимание!");
+                            radioButton2.Checked = false;
+                            double kfactor = side3_tray.K_factorCalculation();
+
+                            reamerA = side3_tray.reamerA_Calculation(kfactor);
+                            reamerB = side3_tray.reamerB_Calculation(kfactor);
+
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side3_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}. Размер вырубки углов {2:f1}x{2:f1}", reamerA, reamerB, side3_tray.cutout_Calculation());
+                        }
+                        else
+                        {
+                            radioButton2.Checked = false;
+                            double kfactor = side3_tray.K_factorCalculation();
+
+                            reamerA = side3_tray.reamerA_Calculation(kfactor);
+                            reamerB = side3_tray.reamerB_Calculation(kfactor);
+
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side3_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}. Размер вырубки углов {2:f1}x{2:f1}", reamerA, reamerB, side3_tray.cutout_Calculation());
+                        }
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Заковка больше, чем борт!");
+                    }
+                }
+                if (radioButton2.Checked == true)
+                {
+                    radioButton1.Checked = false;
+                    MessageBox.Show("В разработке!", "В разработке!");
+                }
+            }
+            if (board2Tray.Checked == true)
+            {
+                ovenTray2 side2_tray = new ovenTray2(2, SizeA, SizeB, bort, zak, _rad, _s, _angle);
+                double reamerA, reamerB;
+                label5.Text = null;
+                label4.Text = null;
+                label5.Text = "Результат: ";
+
+                if (radioButton1.Checked == true)
+                {
+
+                    if (zak <= bort)
+                    {
+                        if (zak < 7 && zak > 0)
+                        {
+                            MessageBox.Show("Заковка меньше 7 мм! Проверьте минимальный отгиб на используемой матрице!", "Внимание!");
+                            radioButton2.Checked = false;
+                            double kfactor = side2_tray.K_factorCalculation();
+
+                            reamerA = side2_tray.reamerA_Calculation(kfactor);
+                            reamerB = side2_tray.reamerB_Calculation(kfactor);
+
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side2_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}", reamerA, reamerB);
+                        }
+                        else
+                        {
+                            radioButton2.Checked = false;
+                            double kfactor = side2_tray.K_factorCalculation();
+
+                            reamerA = side2_tray.reamerA_Calculation(kfactor);
+                            reamerB = side2_tray.reamerB_Calculation(kfactor);
+
+                            label5.Text += String.Format("Допуск на гибку для угла {0} равен: {1:f1}, k-фактор: {2:f2}", _angle, side2_tray._BA, kfactor);
+                            label4.Text += String.Format("Размер развертки: {0:f1}x{1:f1}.", reamerA, reamerB);
+                        }
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Заковка больше, чем борт!");
+                    }
+                }
+                if (radioButton2.Checked == true)
+                {
+                    radioButton1.Checked = false;
+                    MessageBox.Show("В разработке!", "В разработке!");
+                }
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

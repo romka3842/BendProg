@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BendProg
 {
-    class ovenTray3 : ovenTray
+    class ovenTray2: ovenTray
     {
-        public ovenTray3(double sideNumber, double sideA, double sideB, double board, double kink, double rad, double s, double angle) : base(sideNumber, sideA,  sideB,  board,  kink,  rad,  s,  angle)
+        public ovenTray2(double sideNumber, double sideA, double sideB, double board, double kink, double rad, double s, double angle) : base(sideNumber, sideA, sideB, board, kink, rad, s, angle)
         {
-           
+
         }
         public override double reamerA_Calculation(double kfactor)
         {
@@ -23,7 +23,7 @@ namespace BendProg
                 _BA = BA_calculation_after90(kfactor);
             }
 
-            _reamerA = _sideA - _s + _board + _kink + _BA;
+            _reamerA = _sideA; //- _s + _board + _kink + _BA;
             return _reamerA;
         }
 
